@@ -15,7 +15,19 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('name');
+
+            $table->longText('description')->nullable();
+
+            $table->string('image')->nullable();
+
+            $table->longText('address')->nullable();
+
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
