@@ -16,29 +16,23 @@ return new class extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('product_id')->unsigned()->nullable();
+            $table->string('name'); // varchar 255
 
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->string('code'); // varchar 255
 
-            $table->bigInteger('manufacturer_id')->unsigned()->nullable();
+            $table->enum('type', ['number_of_items_validation', 'total_amount_validation']);
 
-            $table->foreign('manufacturer_id')->references('id')->on('manufacturers');
+            $table->integer('value')->nullable();
 
-            $table->bigInteger('vehicle_model_id')->unsigned()->nullable();
+            $table->enum('price_type', ['fixed', 'percentage']);
 
-            $table->foreign('vehicle_model_id')->references('id')->on('vehicle_models');
+            $table->float('price_value', 10, 2)->nullable();
 
-            $table->bigInteger('delivery_method_id')->unsigned()->nullable();
+            $table->longText('description')->nullable(); // text
 
-            $table->foreign('delivery_method_id')->references('id')->on('delivery_methods');
+            $table->string('image')->nullable(); // varchar 255
 
-            $table->string('name');
-
-            $table->longText('description')->nullable();
-
-            $table->string('image')->nullable();
-
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(true); // tinyint 2 - 0 or 1
 
             $table->timestamps();
             $table->softDeletes();

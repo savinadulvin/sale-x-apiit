@@ -15,18 +15,79 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
- Route::resource('users', App\Http\Controllers\UserController::class);
- Route::resource('users', App\Http\Controllers\UserController::class)
-     ->middleware([
-         'auth',
-         'admin',
-     ]);
 
- Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('users', App\Http\Controllers\UserController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
 
- Route::get('/', function () {
-    // dd(auth()->check());
-    return view('home');
-});
+Route::resource('manufacturers', App\Http\Controllers\ManufacturerController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
 
+Route::resource('vehicle-models', App\Http\Controllers\VehicleModelController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('vehicle-addons', App\Http\Controllers\VehicleAddonController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('vehicles', App\Http\Controllers\ProductController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::get('vehicle/{id}', [
+    App\Http\Controllers\ProductController::class, 'show'
+])->name('vehicle.show');
+
+Route::resource('spareparts', App\Http\Controllers\SparepartController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('promotions', App\Http\Controllers\PromotionController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('stores', App\Http\Controllers\StoreController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('delivery-methods', App\Http\Controllers\DeliveryMethodController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('orders', App\Http\Controllers\OrderController::class)
+    ->middleware([
+        'auth',
+        'admin',
+    ]);
+
+Route::resource('cart', App\Http\Controllers\CartController::class)
+    ->middleware([
+        'auth'
+    ]);
+
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
